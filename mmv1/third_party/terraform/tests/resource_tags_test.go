@@ -2,6 +2,7 @@ package google
 
 import (
 	"fmt"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 	"strings"
 	"testing"
 
@@ -44,7 +45,7 @@ func TestAccTags(t *testing.T) {
 
 func testAccTagsTagKey_tagKeyBasic(t *testing.T) {
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"random_suffix": RandString(t, 10),
 	}
 
@@ -73,7 +74,7 @@ resource "google_tags_tag_key" "key" {
 
 func testAccTagsTagKey_tagKeyBasicWithPurposeGceFirewall(t *testing.T) {
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"random_suffix": RandString(t, 10),
 	}
 
@@ -111,7 +112,7 @@ resource "google_tags_tag_key" "key" {
 
 func testAccTagsTagKey_tagKeyUpdate(t *testing.T) {
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"random_suffix": RandString(t, 10),
 	}
 
@@ -197,7 +198,7 @@ func testAccCheckTagsTagKeyDestroyProducer(t *testing.T) func(s *terraform.State
 
 func testAccTagsTagValue_tagValueBasic(t *testing.T) {
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"random_suffix": RandString(t, 10),
 	}
 
@@ -233,7 +234,7 @@ resource "google_tags_tag_value" "value" {
 
 func testAccTagsTagValue_tagValueUpdate(t *testing.T) {
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"random_suffix": RandString(t, 10),
 	}
 
@@ -335,7 +336,7 @@ func testAccTagsTagBinding_tagBindingBasic(t *testing.T) {
 	t.Parallel()
 
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"project_id":    "tf-test-" + RandString(t, 10),
 		"random_suffix": RandString(t, 10),
 	}
@@ -421,7 +422,7 @@ func testAccTagsTagKeyIamBinding(t *testing.T) {
 	context := map[string]interface{}{
 		"random_suffix": RandString(t, 10),
 		"role":          "roles/viewer",
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 
 		"short_name": "tf-test-key-" + RandString(t, 10),
 	}
@@ -447,7 +448,7 @@ func testAccTagsTagKeyIamMember(t *testing.T) {
 	context := map[string]interface{}{
 		"random_suffix": RandString(t, 10),
 		"role":          "roles/viewer",
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 
 		"short_name": "tf-test-key-" + RandString(t, 10),
 	}
@@ -470,7 +471,7 @@ func testAccTagsTagKeyIamPolicy(t *testing.T) {
 	context := map[string]interface{}{
 		"random_suffix": RandString(t, 10),
 		"role":          "roles/viewer",
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 
 		"short_name": "tf-test-key-" + RandString(t, 10),
 	}
@@ -588,7 +589,7 @@ func testAccTagsTagValueIamBinding(t *testing.T) {
 	context := map[string]interface{}{
 		"random_suffix": RandString(t, 10),
 		"role":          "roles/viewer",
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 
 		"key_short_name":   "tf-test-key-" + RandString(t, 10),
 		"value_short_name": "tf-test-value-" + RandString(t, 10),
@@ -615,7 +616,7 @@ func testAccTagsTagValueIamMember(t *testing.T) {
 	context := map[string]interface{}{
 		"random_suffix": RandString(t, 10),
 		"role":          "roles/viewer",
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 
 		"key_short_name":   "tf-test-key-" + RandString(t, 10),
 		"value_short_name": "tf-test-value-" + RandString(t, 10),
@@ -639,7 +640,7 @@ func testAccTagsTagValueIamPolicy(t *testing.T) {
 	context := map[string]interface{}{
 		"random_suffix": RandString(t, 10),
 		"role":          "roles/viewer",
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 
 		"key_short_name":   "tf-test-key-" + RandString(t, 10),
 		"value_short_name": "tf-test-value-" + RandString(t, 10),
@@ -781,7 +782,7 @@ func testAccTagsLocationTagBinding_locationTagBindingbasic(t *testing.T) {
 	t.Parallel()
 
 	context := map[string]interface{}{
-		// "org_id":        GetTestOrgFromEnv(t),
+		// "org_id":        acctest.GetTestOrgFromEnv(t),
 		// "project_id":    "tf-test-" + RandString(t, 10),
 		"random_suffix": RandString(t, 10),
 	}
@@ -885,7 +886,7 @@ func TestAccTagsLocationTagBinding_locationTagBindingzonal(t *testing.T) {
 	t.Parallel()
 
 	context := map[string]interface{}{
-		"org_id":        GetTestOrgFromEnv(t),
+		"org_id":        acctest.GetTestOrgFromEnv(t),
 		"random_suffix": RandString(t, 10),
 	}
 

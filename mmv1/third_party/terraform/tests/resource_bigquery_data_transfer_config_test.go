@@ -2,6 +2,7 @@ package google
 
 import (
 	"fmt"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 	"strings"
 	"testing"
 	"time"
@@ -174,7 +175,7 @@ func TestAccBigqueryDataTransferConfig(t *testing.T) {
 
 func testAccBigqueryDataTransferConfig_scheduledQuery_basic(t *testing.T) {
 	// Uses time.Now
-	SkipIfVcr(t)
+	acctest.SkipIfVcr(t)
 	random_suffix := RandString(t, 10)
 	now := time.Now().UTC()
 	start_time := now.Add(1 * time.Hour).Format(time.RFC3339)
@@ -200,7 +201,7 @@ func testAccBigqueryDataTransferConfig_scheduledQuery_basic(t *testing.T) {
 
 func testAccBigqueryDataTransferConfig_scheduledQuery_update(t *testing.T) {
 	// Uses time.Now
-	SkipIfVcr(t)
+	acctest.SkipIfVcr(t)
 	random_suffix := RandString(t, 10)
 	now := time.Now().UTC()
 	first_start_time := now.Add(1 * time.Hour).Format(time.RFC3339)
@@ -241,7 +242,7 @@ func testAccBigqueryDataTransferConfig_scheduledQuery_update(t *testing.T) {
 
 func testAccBigqueryDataTransferConfig_scheduledQuery_no_destination(t *testing.T) {
 	// Uses time.Now
-	SkipIfVcr(t)
+	acctest.SkipIfVcr(t)
 	random_suffix := RandString(t, 10)
 	now := time.Now().UTC()
 	start_time := now.Add(1 * time.Hour).Format(time.RFC3339)

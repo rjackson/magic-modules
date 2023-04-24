@@ -2,6 +2,7 @@ package google
 
 import (
 	"fmt"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 	"reflect"
 	"testing"
 
@@ -17,7 +18,7 @@ func TestAccBigQueryDatasetAccess_basic(t *testing.T) {
 
 	expected := map[string]interface{}{
 		"role":        "OWNER",
-		"userByEmail": fmt.Sprintf("%s@%s.iam.gserviceaccount.com", saID, GetTestProjectFromEnv()),
+		"userByEmail": fmt.Sprintf("%s@%s.iam.gserviceaccount.com", saID, acctest.GetTestProjectFromEnv()),
 	}
 
 	VcrTest(t, resource.TestCase{
@@ -46,7 +47,7 @@ func TestAccBigQueryDatasetAccess_view(t *testing.T) {
 
 	expected := map[string]interface{}{
 		"view": map[string]interface{}{
-			"projectId": GetTestProjectFromEnv(),
+			"projectId": acctest.GetTestProjectFromEnv(),
 			"datasetId": datasetID2,
 			"tableId":   tableID,
 		},
@@ -77,7 +78,7 @@ func TestAccBigQueryDatasetAccess_authorizedDataset(t *testing.T) {
 	expected := map[string]interface{}{
 		"dataset": map[string]interface{}{
 			"dataset": map[string]interface{}{
-				"projectId": GetTestProjectFromEnv(),
+				"projectId": acctest.GetTestProjectFromEnv(),
 				"datasetId": datasetID2,
 			},
 			"targetTypes": []interface{}{"VIEWS"},
@@ -102,7 +103,7 @@ func TestAccBigQueryDatasetAccess_authorizedDataset(t *testing.T) {
 
 func TestAccBigQueryDatasetAccess_authorizedRoutine(t *testing.T) {
 	// Multiple fine-grained resources
-	SkipIfVcr(t)
+	acctest.SkipIfVcr(t)
 	t.Parallel()
 
 	context := map[string]interface{}{
@@ -113,7 +114,7 @@ func TestAccBigQueryDatasetAccess_authorizedRoutine(t *testing.T) {
 
 	expected := map[string]interface{}{
 		"routine": map[string]interface{}{
-			"projectId": GetTestProjectFromEnv(),
+			"projectId": acctest.GetTestProjectFromEnv(),
 			"datasetId": context["public_dataset"],
 			"routineId": context["public_routine"],
 		},
@@ -138,7 +139,7 @@ func TestAccBigQueryDatasetAccess_authorizedRoutine(t *testing.T) {
 
 func TestAccBigQueryDatasetAccess_multiple(t *testing.T) {
 	// Multiple fine-grained resources
-	SkipIfVcr(t)
+	acctest.SkipIfVcr(t)
 	t.Parallel()
 
 	datasetID := fmt.Sprintf("tf_test_%s", RandString(t, 10))

@@ -2,6 +2,7 @@ package google
 
 import (
 	"fmt"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 	"strings"
 	"testing"
 
@@ -22,7 +23,7 @@ func TestAccStorageTransferAgentPool_agentPoolUpdate(t *testing.T) {
 		CheckDestroy:             testAccCheckStorageTransferAgentPoolDestroyProducer(t),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccStorageTransferAgentPool_agentPoolBasic(GetTestProjectFromEnv(), agentPoolName, displayName),
+				Config: testAccStorageTransferAgentPool_agentPoolBasic(acctest.GetTestProjectFromEnv(), agentPoolName, displayName),
 			},
 			{
 				ResourceName:      "google_storage_transfer_agent_pool.foo",
@@ -30,7 +31,7 @@ func TestAccStorageTransferAgentPool_agentPoolUpdate(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccStorageTransferAgentPool_agentPoolBasic(GetTestProjectFromEnv(), agentPoolName, displayNameUpdate),
+				Config: testAccStorageTransferAgentPool_agentPoolBasic(acctest.GetTestProjectFromEnv(), agentPoolName, displayNameUpdate),
 			},
 			{
 				ResourceName:      "google_storage_transfer_agent_pool.foo",
@@ -38,7 +39,7 @@ func TestAccStorageTransferAgentPool_agentPoolUpdate(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccStorageTransferAgentPool_updateLimitMbps(GetTestProjectFromEnv(), agentPoolName, displayNameUpdate),
+				Config: testAccStorageTransferAgentPool_updateLimitMbps(acctest.GetTestProjectFromEnv(), agentPoolName, displayNameUpdate),
 			},
 			{
 				ResourceName:      "google_storage_transfer_agent_pool.foo",
@@ -46,7 +47,7 @@ func TestAccStorageTransferAgentPool_agentPoolUpdate(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccStorageTransferAgentPool_omitDisplayName(GetTestProjectFromEnv(), agentPoolName),
+				Config: testAccStorageTransferAgentPool_omitDisplayName(acctest.GetTestProjectFromEnv(), agentPoolName),
 			},
 			{
 				ResourceName:      "google_storage_transfer_agent_pool.foo",
@@ -54,7 +55,7 @@ func TestAccStorageTransferAgentPool_agentPoolUpdate(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccStorageTransferAgentPool_omitBandwidthLimit(GetTestProjectFromEnv(), agentPoolName, displayNameUpdate),
+				Config: testAccStorageTransferAgentPool_omitBandwidthLimit(acctest.GetTestProjectFromEnv(), agentPoolName, displayNameUpdate),
 			},
 			{
 				ResourceName:      "google_storage_transfer_agent_pool.foo",

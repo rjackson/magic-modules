@@ -14,7 +14,7 @@ import (
 // can exist, they need to be run serially. See AccessPolicy for the test runner.
 
 func testAccAccessContextManagerAccessLevel_basicTest(t *testing.T) {
-	org := GetTestOrgFromEnv(t)
+	org := acctest.GetTestOrgFromEnv(t)
 
 	VcrTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.AccTestPreCheck(t) },
@@ -42,7 +42,7 @@ func testAccAccessContextManagerAccessLevel_basicTest(t *testing.T) {
 }
 
 func testAccAccessContextManagerAccessLevel_fullTest(t *testing.T) {
-	org := GetTestOrgFromEnv(t)
+	org := acctest.GetTestOrgFromEnv(t)
 
 	VcrTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.AccTestPreCheck(t) },
@@ -86,7 +86,7 @@ func testAccCheckAccessContextManagerAccessLevelDestroyProducer(t *testing.T) fu
 }
 
 func testAccAccessContextManagerAccessLevel_customTest(t *testing.T) {
-	org := GetTestOrgFromEnv(t)
+	org := acctest.GetTestOrgFromEnv(t)
 
 	VcrTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.AccTestPreCheck(t) },

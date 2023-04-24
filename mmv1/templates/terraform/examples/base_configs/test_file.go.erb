@@ -15,6 +15,12 @@ import (
 <% unless object.skip_delete -%>
   "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 <% end -%>
+
+<% if version == 'private' -%>
+    "internal/terraform-next/google-private/acctest"
+<% else -%>
+    "github.com/hashicorp/terraform-provider-google<%= "-" + version unless version == 'ga'  -%>/google<%= "-" + version unless version == 'ga'  -%>/acctest"
+<% end -%>
 )
 <%
 
@@ -49,7 +55,7 @@ object.examples
 
 func TestAcc<%= test_slug -%>(t *testing.T) {
 <% if example.skip_vcr -%>
-	SkipIfVcr(t)
+	acctest.SkipIfVcr(t)
 <% end -%>
   t.Parallel()
 

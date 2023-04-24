@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 )
 
 func TestAccPubsubSubscription_emptyTTL(t *testing.T) {
@@ -283,7 +284,7 @@ func TestGetComputedTopicName(t *testing.T) {
 func testAccCheckPubsubSubscriptionCache404(t *testing.T, subName string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		config := GoogleProviderConfig(t)
-		url := fmt.Sprintf("%sprojects/%s/subscriptions/%s", config.PubsubBasePath, GetTestProjectFromEnv(), subName)
+		url := fmt.Sprintf("%sprojects/%s/subscriptions/%s", config.PubsubBasePath, acctest.GetTestProjectFromEnv(), subName)
 		resp, err := SendRequest(config, "GET", "", url, config.UserAgent, nil)
 		if err == nil {
 			return fmt.Errorf("Expected Pubsub Subscription %q not to exist, was found", resp["name"])

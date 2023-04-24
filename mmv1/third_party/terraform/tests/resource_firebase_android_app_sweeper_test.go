@@ -1,9 +1,3 @@
-// ----------------------------------------------------------------------------
-//
-//     ***     HANDWRITTEN CODE    ***    Type: MMv1     ***
-//
-// ----------------------------------------------------------------------------
-
 package google
 
 import (
@@ -14,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 )
 
 func init() {
@@ -41,7 +36,7 @@ func testSweepFirebaseAndroidApp(region string) error {
 	}
 
 	t := &testing.T{}
-	billingId := GetTestBillingAccountFromEnv(t)
+	billingId := acctest.GetTestBillingAccountFromEnv(t)
 
 	// Setup variables to replace in list template
 	d := &ResourceDataMock{

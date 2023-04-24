@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 )
 
 // Since each test here is acting on the same organization and only one AccessPolicy
@@ -13,8 +14,8 @@ import (
 
 func testAccAccessContextManagerIngressPolicy_basicTest(t *testing.T) {
 	// Multiple fine-grained resources
-	SkipIfVcr(t)
-	org := GetTestOrgFromEnv(t)
+	acctest.SkipIfVcr(t)
+	org := acctest.GetTestOrgFromEnv(t)
 	projects := BootstrapServicePerimeterProjects(t, 1)
 	policyTitle := RandString(t, 10)
 	perimeterTitle := "perimeter"

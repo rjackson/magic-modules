@@ -39,7 +39,7 @@ examples:
     name: "healthcare_consent_store_basic"
     primary_resource_id: "my-consent"
     primary_resource_name: ' fmt.Sprintf("projects/%s/locations/%s/datasets/tf-test-my-dataset%s",
-      GetTestProjectFromEnv(), GetTestRegionFromEnv(), context["random_suffix"]),
+      acctest.GetTestProjectFromEnv(), acctest.GetTestRegionFromEnv(), context["random_suffix"]),
       fmt.Sprintf("tf-test-my-consent-store%s", context["random_suffix"])'
     vars:
       dataset_id: "my-dataset"
