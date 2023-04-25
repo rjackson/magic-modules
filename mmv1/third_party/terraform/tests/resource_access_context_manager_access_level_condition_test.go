@@ -54,7 +54,7 @@ func testAccCheckAccessContextManagerAccessLevelConditionPresent(t *testing.T, n
 		}
 
 		config := GoogleProviderConfig(t)
-		url, err := replaceVarsForTest(config, rs, "{{AccessContextManagerBasePath}}{{access_level}}")
+		url, err := acctest.ReplaceVarsForTest(config, rs, "{{AccessContextManagerBasePath}}{{access_level}}")
 		if err != nil {
 			return err
 		}
@@ -82,7 +82,7 @@ func testAccCheckAccessContextManagerAccessLevelConditionDestroyProducer(t *test
 
 			config := GoogleProviderConfig(t)
 
-			url, err := replaceVarsForTest(config, rs, "{{AccessContextManagerBasePath}}{{access_level}}")
+			url, err := acctest.ReplaceVarsForTest(config, rs, "{{AccessContextManagerBasePath}}{{access_level}}")
 			if err != nil {
 				return err
 			}

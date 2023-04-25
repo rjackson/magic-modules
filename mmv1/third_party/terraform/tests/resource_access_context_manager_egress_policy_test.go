@@ -49,7 +49,7 @@ func testAccCheckAccessContextManagerEgressPolicyDestroyProducer(t *testing.T) f
 
 			config := GoogleProviderConfig(t)
 
-			url, err := replaceVarsForTest(config, rs, "{{AccessContextManagerBasePath}}{{egress_policy_name}}")
+			url, err := acctest.ReplaceVarsForTest(config, rs, "{{AccessContextManagerBasePath}}{{egress_policy_name}}")
 			if err != nil {
 				return err
 			}
