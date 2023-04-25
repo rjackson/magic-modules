@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-provider-google/google/acctest"
 )
 
 // This will sweep GCE Disk resources
@@ -20,7 +21,7 @@ func testSweepDisk(region string) error {
 	resourceName := "ComputeDisk"
 	log.Printf("[INFO][SWEEPER_LOG] Starting sweeper for %s", resourceName)
 
-	config, err := SharedConfigForRegion(region)
+	config, err := acctest.SharedConfigForRegion(region)
 	if err != nil {
 		log.Printf("[INFO][SWEEPER_LOG] error getting shared config for region: %s", err)
 		return err
@@ -61,7 +62,7 @@ func testSweepDisk(region string) error {
 
 			id := obj["name"].(string)
 			// Increment count and skip if resource is not sweepable.
-			if !IsSweepableTestResource(id) {
+			if !acctest.IsSweepableTestResource(id) {
 				nonPrefixCount++
 				continue
 			}
