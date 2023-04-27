@@ -255,6 +255,8 @@ module Provider
                         'third_party/terraform/utils/disk_type.go'],
                        ['converters/google/resources/transport/validation.go',
                         'third_party/terraform/transport/validation.go'],
+                       ['converters/google/resources/verify/validation.go',
+                        'third_party/terraform/verify/validation.go'],
                        ['converters/google/resources/validation.go',
                         'third_party/terraform/utils/validation.go'],
                        ['converters/google/resources/regional_utils.go',
