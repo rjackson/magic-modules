@@ -39,8 +39,10 @@ import (
   "github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 <% if version == 'private' -%>
     transport_tpg "internal/terraform-next/google-private/transport"
+    "internal/terraform-next/google-private/verify"
 <% else -%>
     transport_tpg "github.com/hashicorp/terraform-provider-google<%= "-" + version unless version == 'ga'  -%>/google<%= "-" + version unless version == 'ga'  -%>/transport"
+    "github.com/hashicorp/terraform-provider-google<%= "-" + version unless version == 'ga'  -%>/google<%= "-" + version unless version == 'ga'  -%>/verify"
 <% end -%>
 
 <% if object.gettable_properties.reject { |p| p.ignore_read }.any? { |prop| prop.flatten_object } -%>

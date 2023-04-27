@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	"github.com/hashicorp/terraform-provider-google/google/verify"
 )
 
 func TestValidateGCEName(t *testing.T) {
@@ -27,7 +28,7 @@ func TestValidateGCEName(t *testing.T) {
 		{TestName: "too long", Value: "foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoob", ExpectError: true},
 	}
 
-	es := testStringValidationCases(x, validateGCEName)
+	es := testStringValidationCases(x, verify.ValidateGCEName)
 	if len(es) > 0 {
 		t.Errorf("Failed to validate GCP names: %v", es)
 	}
@@ -72,7 +73,7 @@ func TestValidateRFC3339Time(t *testing.T) {
 		{TestName: "not numbers", Value: "ab:cd", ExpectError: true},
 	}
 
-	es := testStringValidationCases(cases, validateRFC3339Time)
+	es := testStringValidationCases(cases, verify.ValidateRFC3339Time)
 	if len(es) > 0 {
 		t.Errorf("Failed to validate RFC3339 times: %v", es)
 	}
@@ -102,7 +103,7 @@ func TestValidateRFC1035Name(t *testing.T) {
 			TestName:    c.TestName,
 			Value:       c.Value,
 			ExpectError: c.ExpectError,
-		}, validateRFC1035Name(c.Min, c.Max))
+		}, verify.ValidateRFC1035Name(c.Min, c.Max))
 
 		if len(errors) > 0 {
 			t.Errorf("%s failed; %v", c.TestName, errors)
@@ -134,7 +135,7 @@ func TestValidateServiceAccountLink(t *testing.T) {
 		},
 	}
 
-	es := testStringValidationCases(cases, validateRegexp(ServiceAccountLinkRegex))
+	es := testStringValidationCases(cases, validateRegexp(verify.ServiceAccountLinkRegex))
 	if len(es) > 0 {
 		t.Errorf("Failed to validate Service Account Links: %v", es)
 	}
@@ -182,7 +183,7 @@ func TestProjectRegex(t *testing.T) {
 		{"", false},
 		{"example_", false},
 	}
-	r := regexp.MustCompile("^" + ProjectRegex + "$")
+	r := regexp.MustCompile("^" + verify.ProjectRegex + "$")
 	for _, test := range tests {
 		if got := r.MatchString(test.project); got != test.want {
 			t.Errorf("got %t, want %t for project %v", got, test.want, test.project)
@@ -211,7 +212,7 @@ func TestOrEmpty(t *testing.T) {
 	}
 
 	for tn, tc := range cases {
-		validateFunc := orEmpty(validation.StringInSlice([]string{"valid"}, false))
+		validateFunc := verify.OrEmpty(validation.StringInSlice([]string{"valid"}, false))
 		_, errors := validateFunc(tc.Value, tn)
 		if len(errors) > 0 && !tc.ExpectValidationErrors {
 			t.Errorf("%s: unexpected errors %s", tn, errors)
@@ -237,7 +238,7 @@ func TestValidateProjectID(t *testing.T) {
 		{TestName: "has a final hyphen", Value: "foo-bar-", ExpectError: true},
 	}
 
-	es := testStringValidationCases(x, validateProjectID())
+	es := testStringValidationCases(x, verify.ValidateProjectID())
 	if len(es) > 0 {
 		t.Errorf("Failed to validate project ID's: %v", es)
 	}
@@ -260,7 +261,7 @@ func TestValidateDSProjectID(t *testing.T) {
 		{TestName: "has a final hyphen", Value: "foo-bar-", ExpectError: true},
 	}
 
-	es := testStringValidationCases(x, validateDSProjectID())
+	es := testStringValidationCases(x, verify.ValidateDSProjectID())
 	if len(es) > 0 {
 		t.Errorf("Failed to validate project ID's: %v", es)
 	}
@@ -284,7 +285,7 @@ func TestValidateProjectName(t *testing.T) {
 		{TestName: "too long", Value: strings.Repeat("a", 31), ExpectError: true},
 	}
 
-	es := testStringValidationCases(x, validateProjectName())
+	es := testStringValidationCases(x, verify.ValidateProjectName())
 	if len(es) > 0 {
 		t.Errorf("Failed to validate project ID's: %v", es)
 	}
@@ -312,7 +313,7 @@ func TestValidateIAMCustomRoleIDRegex(t *testing.T) {
 		{TestName: "too long", Value: strings.Repeat("f", 65), ExpectError: true},
 	}
 
-	es := testStringValidationCases(x, validateIAMCustomRoleID)
+	es := testStringValidationCases(x, verify.ValidateIAMCustomRoleID)
 	if len(es) > 0 {
 		t.Errorf("Failed to validate IAMCustomRole IDs: %v", es)
 	}
