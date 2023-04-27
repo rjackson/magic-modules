@@ -208,7 +208,7 @@ properties:
       - :ERROR
       - :INFO
       - :DEBUG
-    diff_suppress_func: 'EmptyOrDefaultStringSuppress("NONE")'
+    diff_suppress_func: 'verify.EmptyOrDefaultStringSuppress("NONE")'
   - !ruby/object:Api::Type::Array
     name: 'credentials'
     description: |
